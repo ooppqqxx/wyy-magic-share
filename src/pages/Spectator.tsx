@@ -32,7 +32,7 @@ export default function Spectator() {
 
     if (!sessionId) return;
     
-    fetch(`${API_BASE}/api/session/${sessionId}`)
+    fetch(`/api/session/${sessionId}`)
       .then(res => res.json())
       .then(data => {
         if (data.success && data.playlist) {
@@ -43,7 +43,7 @@ export default function Spectator() {
       })
       .catch(console.error);
 
-    const eventSource = new EventSource(`${API_BASE}/api/spectator-events/${sessionId}`);
+    const eventSource = new EventSource(`/api/spectator-events/${sessionId}`);
     
     eventSource.onmessage = (e) => {
       try {
@@ -68,7 +68,7 @@ export default function Spectator() {
     
     if (sessionId) {
       try {
-        await fetch(`${API_BASE}/api/play`, {
+        await fetch(`/api/play`, {
            method: 'POST',
            headers: { 'Content-Type': 'application/json' },
            body: JSON.stringify({ sessionId, song })

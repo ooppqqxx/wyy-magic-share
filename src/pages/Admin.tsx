@@ -29,7 +29,8 @@ export default function Admin() {
     if (!options.headers) options.headers = {};
     if (token) options.headers['Authorization'] = `Bearer ${token}`;
     
-    const res = await fetch(`${API_BASE}${url}`, options);
+    // We use relative URL because Netlify proxy will handle routing back to the wuy-music backend
+    const res = await fetch(url, options);
     if (res.status === 401) {
       setIsAuthenticated(false);
       localStorage.removeItem('adminToken');
@@ -41,7 +42,7 @@ export default function Admin() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await fetch(`${API_BASE}/api/login`, {
+      const res = await fetch('/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password })
@@ -83,7 +84,7 @@ export default function Admin() {
     
     // Connect to SSE for current session
     const token = localStorage.getItem('adminToken');
-    const eventSource = new EventSource(`${API_BASE}/api/events/${sessionId}?token=${token}`);
+    const eventSource = new EventSource(`/api/events/${sessionId}?token=${token}`);
     
     eventSource.onmessage = (e) => {
       try {
@@ -254,7 +255,7 @@ export default function Admin() {
       // 3. Load Images (Cover & QR)
       const coverImg = new Image();
       coverImg.crossOrigin = 'anonymous'; // Important for CORS
-      coverImg.src = `${API_BASE}/api/proxy-image?url=${encodeURIComponent(playlist.coverPic)}`;
+      coverImg.src = `/api/proxy-image?url=${encodeURIComponent(playlist.coverPic)}`;
       await new Promise(resolve => { coverImg.onload = resolve; coverImg.onerror = resolve; });
 
       const qrDataUrl = await QRCode.toDataURL(spectatorUrl, { 
