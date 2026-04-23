@@ -1,0 +1,6 @@
+{
+  "name": "Magic Mind Reading Music",
+  "description": "A web app magic trick to replicate an music playlist and read the spectator's selected song.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}

@@ -1,0 +1,9 @@
+{
+  "projectId": "magic-music-db",
+  "apiKey": "AIzaSyC9nunFQTi7vfX5ntmMW3S9yfLD52DRvEI",
+  "authDomain": "magic-music-db.firebaseapp.com",
+  "storageBucket": "magic-music-db.firebasestorage.app",
+  "messagingSenderId": "818527585074",
+  "appId": "1:818527585074:web:aa74dd8dc81571512e8d2b",
+  "firestoreDatabaseId": "(default)"
+}
